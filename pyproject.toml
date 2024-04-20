@@ -4,10 +4,12 @@ version = "0.1.0"
 description = ""
 authors = ["DAVIDE CHIEREGATO <davide.chieregato96@gmail.com>"]
 readme = "README.md"
+packages = [{include = "gcp_python_project"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
 google-cloud = "^0.34.0"
+google-cloud-storage = "^2.16.0"
 
 
 [build-system]
