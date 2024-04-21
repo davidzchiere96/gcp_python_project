@@ -49,7 +49,7 @@ class BigQueryClient(CloudClient):
             self.connect()
         return self.client
 
-
+# CloudStorageClient().connect()
 # BigQueryClient().get_client()
 
 
