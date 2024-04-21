@@ -9,7 +9,7 @@ def logger():
     # Create log configurations
     logging.basicConfig(
         level=logging.INFO,
-        format="%(asctime)s | %(levelname)s | %(threadName)s | GCS_Asset | {transaction_id} | %(message)s".format(transaction_id=transaction_id),
+        format="%(asctime)s | %(levelname)s | %(threadName)s | GCP_API_python_project | {transaction_id} | %(message)s".format(transaction_id=transaction_id),
         handlers=[
             logging.StreamHandler()
         ])
