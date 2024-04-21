@@ -32,6 +32,6 @@ Google Cloud Storage API Asset Libraries
 ### Main Architecture
 
 <p align="center">
-  <img src="doc\img\GCS_ASSET_CODE_FLOW.png" />
+  <img src="doc\img\CLASS_DIAGRAM.png" />
 </p>
 <br>
