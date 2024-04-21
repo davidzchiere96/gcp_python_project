@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import MagicMock
-from cloudClient import CloudStorageClient
+from cloudClientConnector import CloudStorageClient
 
 class TestCloudStorageClient(unittest.TestCase):
     def setUp(self):

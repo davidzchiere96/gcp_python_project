@@ -2,7 +2,19 @@
 
   </a>
   <a href="https://www.python.org/downloads/release/python-311">
-    <img src="https://img.shields.io/badge/python-3.11-green.svg" lazyload />
+    <img src="https://img.shields.io/badge/python-3.11-purple.svg" lazyload />
+  </a>
+  </a>
+  <a href="">
+    <img src="https://img.shields.io/badge/GoogleCloud lib-0.34.0-blue.svg" lazyload />
+  </a>
+  </a>
+  <a href="">
+    <img src="https://img.shields.io/badge/CloudStorage lib-2.16.0-lightblue.svg" lazyload />
+  </a>
+  </a>
+  <a href="">
+    <img src="https://img.shields.io/badge/BigQuery lib-3.21.0-lightgreen.svg" lazyload />
   </a>
 
 ####
