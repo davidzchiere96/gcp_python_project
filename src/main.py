@@ -21,6 +21,7 @@ def main():
         bucket_name = inputRequests.input_bucket_name()
         file_name = inputRequests.input_file_name()
         FileGetter(bucket_name,file_name).get_file()
+        # FileGetter(bucket_name, file_name).get_file_size()
 
     # Verify Table existence
     elif operation_required == 3:
