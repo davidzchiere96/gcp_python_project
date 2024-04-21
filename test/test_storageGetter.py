@@ -1,9 +1,7 @@
 import unittest
-import logger
 from unittest.mock import MagicMock
 from storageGetter import BucketGetter,FileGetter
 
-log = logger.logger()
 
 class TestBucketGetter(unittest.TestCase):
     def test_get_bucket(self):
