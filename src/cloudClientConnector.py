@@ -4,7 +4,7 @@ import os
 from abc import ABC, abstractmethod
 
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = r"config\training-gcp-309207-683a827c1e0e.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = r"global_path/to/file"
 log = logger.logger()
 
 
