@@ -78,6 +78,12 @@ Finally in the **bigQueryGetter.py** the connection to a BQ table is defined as 
 All these classes are orchestrated by the **main.py** and the **inputRequests.py** 
 and logs are customized in the **logger.py**.
 
+### Code Flow
+<p align="center">
+  <img src="doc\img\GCS_ASSET_CODE_FLOW.png" />
+</p>
+<br>
+
 ### Class Diagram
 <p align="center">
   <img src="doc\img\CLASS_DIAGRAM.png" />
