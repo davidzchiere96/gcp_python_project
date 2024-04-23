@@ -15,11 +15,14 @@
 
 ####
 
-## GCP References
+## References
+
+[Poetry Doc](https://python-poetry.org/docs/)
 
 [Cloud Storage Doc](https://cloud.google.com/storage/docs?hl=i)
 
 [BigQuery Doc](https://cloud.google.com/bigquery/docs?hl=it)
+
 
 
 ####
