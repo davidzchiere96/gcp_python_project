@@ -4,7 +4,7 @@ import os
 from abc import ABC, abstractmethod
 
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = r"global_path/to/file"
+# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = r"global_path/to/file"
 log = logger.logger()
 
 
@@ -49,7 +49,7 @@ class BigQueryClient(CloudClient):
             self.connect()
         return self.client
 
-# CloudStorageClient().connect()
+CloudStorageClient().connect()
 # BigQueryClient().get_client()
 
 
