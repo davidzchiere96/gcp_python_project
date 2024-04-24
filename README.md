@@ -80,7 +80,7 @@ and logs are customized in the **logger.py**.
 
 ### Code Flow
 <p align="center">
-  <img src="doc\img\GCS_ASSET_CODE_FLOW.png" />
+  <img src="doc\img\api_python_project_code_flow.png" />
 </p>
 <br>
 
