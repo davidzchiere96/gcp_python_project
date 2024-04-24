@@ -29,14 +29,13 @@
 
 
 ## Introduction
-This is a simple Python project managed by poetry to call Google APIs 
-in order to use the main Google Cloud Platform libraries.
-
+This is a basic Python project managed by Poetry, designed to interact 
+with Google APIs and utilize core Google Cloud Platform libraries.
 
 ## Main Architecture
 The structure of the project is based on the Object Oriented Paradigm.
 ####
-The first two classes implemented in the cloudClientConnector.py**:
+The first two classes implemented in the **cloudClientConnector.py**:
     
     class CloudStorageClient(CloudClient)
     -> Variables: client
