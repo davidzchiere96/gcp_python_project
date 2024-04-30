@@ -1,9 +1,9 @@
 import os
-import logger
+from logger import Log
 from cloudClientConnector import BigQueryClient
 
-
-log = logger.logger()
+log_instance = Log()
+log = log_instance.logger()
 
 
 class TableGetter:

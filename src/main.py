@@ -1,10 +1,11 @@
 from bigQueryGetter import TableGetter
 from storageGetter import FileGetter, BucketGetter
-import logger
+from logger import Log
 import inputRequests
 
 
-log = logger.logger()
+log_instance = Log()
+log = log_instance.logger()
 
 
 def main():
@@ -13,11 +14,13 @@ def main():
 
     # Verify Bucket existence
     if operation_required == 1:
+        # log.info("Your request is to verify the existence of a bucket in Cloud Storage")
         bucket_name = inputRequests.input_bucket_name()
         BucketGetter(bucket_name).get_bucket()
 
     # Verify File existence
     elif operation_required == 2:
+        # log.info("Your request is to verify the existence of a blob in Cloud Storage")
         bucket_name = inputRequests.input_bucket_name()
         file_name = inputRequests.input_file_name()
         FileGetter(bucket_name,file_name).get_file()
@@ -25,11 +28,12 @@ def main():
 
     # Verify Table existence
     elif operation_required == 3:
+        # log.info("Your request is to verify the existence of a table in BigQuery")
         table_id = inputRequests.input_table_id()
         TableGetter(table_id).get_table()
 
     else:
-        log.info("No operation found!")
+        log.warning("No operation found!")
         return
 
 

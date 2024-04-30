@@ -1,11 +1,12 @@
-import logger
+from logger import Log
 from google.cloud import storage, bigquery
 import os
 from abc import ABC, abstractmethod
 
 
 # os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = r"global_path/to/file"
-log = logger.logger()
+log_instance = Log()
+log = log_instance.logger()
 
 
 class CloudClient(ABC):

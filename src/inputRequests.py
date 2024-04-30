@@ -1,6 +1,8 @@
-import logger
+from logger import Log
 
-log = logger.logger()
+log_instance = Log()
+log = log_instance.logger()
+
 
 def input_operation():
     operation_request = int(input(
