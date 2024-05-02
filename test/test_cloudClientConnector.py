@@ -64,25 +64,49 @@ class TestCloudStorageClient(unittest.TestCase):
 
 
 class TestBigQueryClient(unittest.TestCase):
+
     @patch('cloudClientConnector.bigquery.Client')
-    def test_connect(self, bq_client_mock):
-        # Crea un'istanza di CloudStorageClient e chiamo metodo connect
-        bq_client = CloudStorageClient()
-        bq_client.connect()
+    @patch('cloudClientConnector.Log')
+    def test_connect_success(self, mock_log, mock_bigquery_client):
 
-        # Verifica che il client di storage mockato sia stato creato
-        bq_client_mock.assert_called_once()
 
-    def test_get_client(self):
-        bq_client_mock = MagicMock()
+        bigquery_client = BigQueryClient()
 
-        bq_client = BigQueryClient()
-        bq_client.connect = MagicMock(return_value=None)
+        bigquery_client.connect()
 
-        bq_client.client = bq_client_mock
-        bq_client_instance = bq_client.get_client()
+        mock_bigquery_client.assert_called_once()
+        # mock_log.info.assert_called_once_with("BigQuery Client connected!")
 
-        self.assertEqual(bq_client_instance, bq_client_mock)
+    @patch('cloudClientConnector.bigquery.Client')
+    @patch('cloudClientConnector.Log')
+    def test_connect_failure(self, mock_log, mock_bigquery_client):
+
+        # instantiate
+        bigquery_client = BigQueryClient()
+        mock_bigquery_client.side_effect = Exception("Connection error")
+
+        # act
+        bigquery_client.connect()
+
+        # assert
+        # mock_log.error.assert_called_once_with("Error connecting to BigQuery client: Connection error")
+
+    @patch('cloudClientConnector.BigQueryClient.connect')
+    def test_get_client_if_not_connected(self, mock_bigquery_client_connect):
+
+        bigquery_client = BigQueryClient()
+        bigquery_client.get_client()
+        mock_bigquery_client_connect.assert_called_once()
+
+    @patch('cloudClientConnector.bigquery.Client')
+    def test_get_client_if_connected(self, mock_bigquery_client):
+
+        bigquery_client = BigQueryClient()
+        bigquery_client.client = mock_bigquery_client
+
+        client = bigquery_client.get_client()
+
+        self.assertEqual(client, bigquery_client.client)
 
 
 if __name__ == '__main__':
