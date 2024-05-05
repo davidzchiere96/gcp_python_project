@@ -1,5 +1,5 @@
-import sys
-sys.path.append(r"C:\Users\ECHIERDF9\OneDrive - NTT DATA EMEAL\Desktop\gcp_python_project\gcp_python_project\src")
+# import sys
+# sys.path.append(r"C:\Users\ECHIERDF9\OneDrive - NTT DATA EMEAL\Desktop\gcp_python_project\gcp_python_project\src")
 
 import unittest
 import logger
@@ -37,7 +37,7 @@ class TestCloudStorageClient(unittest.TestCase):
         cloud_storage_client.connect()
 
         # assert
-        # mock_log.error.assert_called_once_with("Error connecting to storage client: Connection error")
+        # mock_log.logger.error.assert_called_once_with("Error connecting to storage client: Connection error")
 
     @patch('cloudClientConnector.CloudStorageClient.connect')
     def test_get_client_if_not_connected(self, mock_storage_client_connect):
@@ -55,12 +55,6 @@ class TestCloudStorageClient(unittest.TestCase):
         client = cloud_storage_client.get_client()
 
         self.assertEqual(client, cloud_storage_client.client)
-
-
-
-
-
-
 
 
 class TestBigQueryClient(unittest.TestCase):
