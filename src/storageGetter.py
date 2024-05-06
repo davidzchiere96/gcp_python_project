@@ -31,7 +31,7 @@ class FileGetter:
             bucket = self.__bucket.get_bucket()
             blob = bucket.blob(self.file_name)
             log.info(f"File '{self.file_name}' from buket '{self.bucket_name}' returned!")
-            return
+            return blob
         except Exception as e:
             log.error(f"File '{self.file_name}' not exists.")
 

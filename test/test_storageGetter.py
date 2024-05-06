@@ -36,11 +36,16 @@ class TestFileGetter(unittest.TestCase):
     @patch('storageGetter.BucketGetter.get_bucket')
     @patch('logger.Log')
     def test_get_file_success(self, mock_log, mock_get_bucket):
-        file_getter = FileGetter("test_bucket","test_file")
+        mock_bucket = mock_get_bucket.return_value
+        mock_blob = mock_bucket.blob.return_value
+
+        file_getter = FileGetter("test_bucket", "test_file")
         file = file_getter.get_file()
 
-        mock_get_bucket.return_value.blob("test_file").assert_called_once()
-        self.assertEqual(file, mock_get_bucket.return_value.blob("test_file"))
+        mock_get_bucket.assert_called_once_with()
+        mock_bucket.blob.assert_called_once_with("test_file")
+        self.assertEqual(file, mock_blob)
+        # mock_log.info.assert_called_once_with("File 'test_file' from buket 'test_bucket' returned!")
 
     @patch('storageGetter.CloudStorageClient.get_client')
     @patch('logger.Log.logger')
