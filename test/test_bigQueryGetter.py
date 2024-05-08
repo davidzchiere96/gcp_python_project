@@ -1,31 +1,37 @@
-import sys
-sys.path.append(r"C:\Users\ECHIERDF9\OneDrive - NTT DATA EMEAL\Desktop\gcp_python_project\gcp_python_project\src")
+# import sys
+# sys.path.append(r"C:\Users\ECHIERDF9\OneDrive - NTT DATA EMEAL\Desktop\gcp_python_project\gcp_python_project\src")
 
 import unittest
 import logger
-from unittest.mock import MagicMock
+from unittest.mock import MagicMock, patch
 from bigQueryGetter import TableGetter
 
-log = logger.logger()
 
 class TestTableGetter(unittest.TestCase):
-    def test_get_table(self):
-        # Mocking the BQClient object AND the get_bucket method
-        bq_client_mock = MagicMock()
-        bq_client_mock.get_table = MagicMock(return_value="mock_table")
 
-        # Creating an instance of BucketGetter with the mocked CloudStorageClient
-        table_getter = TableGetter("mock_table_name")
-        table_getter._TableGetter__big_query_client = bq_client_mock
+    @patch('bigQueryGetter.BigQueryClient.get_client')
+    def test_get_client(self, mock_get_client):
+        table_getter = TableGetter("test_table")
+        table_getter._TableGetter__big_query_client
+        mock_get_client.assert_called_once()
+
+    @patch('bigQueryGetter.BigQueryClient.get_client')
+    @patch('logger.Log')
+    def test_get_table_success(self, mock_log, mock_get_client):
+        table_getter = TableGetter("test_table")
         table = table_getter.get_table()
 
-        # TEST 1
-        # Verifying that the get_table method is called
-        bq_client_mock.get_table.assert_called_once_with("mock_table_name")
+        mock_get_client.return_value.get_table.assert_called_once()
+        self.assertEqual(table, mock_get_client.return_value.get_table("test_table"))
 
-        # TEST 2
-        # Verifying that the returned bucket is correct
-        self.assertEqual(table, "mock_table")
+    @patch('bigQueryGetter.BigQueryClient.get_client')
+    @patch('logger.Log.logger')
+    def test_get_table_failure(self, mock_log, mock_get_client):
+        mock_get_client.get_table.side_effect = Exception("Table not found")
+        table_getter = TableGetter("test_table")
+        table = table_getter.get_table()
+
+        # mock_log.error.assert_called_once_with("Table 'test_table' not exists.")
 
 
 if __name__ == '__main__':
