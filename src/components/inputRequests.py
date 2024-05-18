@@ -1,4 +1,4 @@
-from logger import Log
+from components.logger import Log
 
 log_instance = Log()
 log = log_instance.logger()

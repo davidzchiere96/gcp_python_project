@@ -12,6 +12,10 @@
   <a href="https://cloud.google.com/python/docs/reference/bigquery/latest">
     <img src="https://img.shields.io/badge/BigQuery lib-3.21.0-lightgreen.svg" lazyload />
   </a>
+  </a>
+  <a href="https://cloud.google.com/python/docs/reference/pubsub/latest">
+    <img src="https://img.shields.io/badge/Pub/Sub lib-3.21.0-bluegreen.svg" lazyload />
+  </a>
 
 ####
 
@@ -22,6 +26,8 @@
 [Cloud Storage Doc](https://cloud.google.com/storage/docs?hl=i)
 
 [BigQuery Doc](https://cloud.google.com/bigquery/docs?hl=it)
+
+[Pub/Sub Doc](https://cloud.google.com/pubsub/docs?hl=it)
 
 
 

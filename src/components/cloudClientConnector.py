@@ -1,4 +1,4 @@
-from logger import Log
+from components.logger import Log
 from google.cloud import storage, bigquery, pubsub_v1
 # import os
 from abc import ABC, abstractmethod
