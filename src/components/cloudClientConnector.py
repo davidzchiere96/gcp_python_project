@@ -1,6 +1,6 @@
 from logger import Log
-from google.cloud import storage, bigquery, pubsub
-import os
+from google.cloud import storage, bigquery, pubsub_v1
+# import os
 from abc import ABC, abstractmethod
 
 
@@ -57,7 +57,7 @@ class PubSubClient(CloudClient):
 
     def connect(self):
         try:
-            self.client = pubsub.PublisherClient()
+            self.client = pubsub_v1.PublisherClient()
             log.info("Pub/Sub Publisher Client connected!")
 
         except Exception as e:
