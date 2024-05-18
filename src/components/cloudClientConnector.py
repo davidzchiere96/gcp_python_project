@@ -1,5 +1,5 @@
 from logger import Log
-from google.cloud import storage, bigquery
+from google.cloud import storage, bigquery, pubsub
 import os
 from abc import ABC, abstractmethod
 
@@ -49,6 +49,25 @@ class BigQueryClient(CloudClient):
         if not self.client:
             self.connect()
         return self.client
+
+
+class PubSubClient(CloudClient):
+    def __init__(self):
+        self.client = None
+
+    def connect(self):
+        try:
+            self.client = pubsub.PublisherClient()
+            log.info("Pub/Sub Publisher Client connected!")
+
+        except Exception as e:
+            log.error(f"Error connecting to Pub/Sub Publisher client: {e}")
+
+    def get_client(self):
+        if not self.client:
+            self.connect()
+        return self.client
+
 
 # CloudStorageClient().connect()
 # BigQueryClient().get_client()
