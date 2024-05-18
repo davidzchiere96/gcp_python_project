@@ -1,7 +1,7 @@
-from bigQueryGetter import TableGetter
-from storageGetter import FileGetter, BucketGetter
-from logger import Log
-import inputRequests
+from components.gcp_lib.big_query.bigQueryGetter import TableGetter
+from components.gcp_lib.cloud_storage.storageGetter import FileGetter, BucketGetter
+from components.logger import Log
+from components import inputRequests
 
 
 log_instance = Log()

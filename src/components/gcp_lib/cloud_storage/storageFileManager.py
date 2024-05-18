@@ -1,8 +1,8 @@
-from logger import Log
+from components.logger import Log
 from storageBucketManager import Bucket
 from storageGetter import BucketGetter, FileGetter
-from localGetter import LocalFileGetter
-import inputRequests
+from components.localGetter import LocalFileGetter
+import components.inputRequests
 
 
 log_instance = Log()

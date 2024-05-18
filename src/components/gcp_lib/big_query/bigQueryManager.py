@@ -1,23 +1,22 @@
-# https://googleapis.github.io/google-cloud-python/latest/storage/index.html
-
-from logger import Log
-from cloudClientConnector import CloudStorageClient
-from storageGetter import BucketGetter
-import inputRequests
+from components.logger import Log
+from components.cloudClientConnector import CloudStorageClient
+from components.gcp_lib.cloud_storage.storageGetter import BucketGetter
+from bigQueryGetter import TableGetter
+import components.inputRequests
 
 
 log_instance = Log()
 log = log_instance.logger()
 
-class Bucket:
-    def __init__(self, bucket_name):
+class Table:
+    def __init__(self, table_id):
         self.__storage_client = CloudStorageClient().get_client()
-        self.__bucket_getter = BucketGetter(bucket_name)
-        self.bucket_name = bucket_name
+        self.__bucket_getter =TableGetter(table_id)
+        self.table_id = table_id
 
     def create_bucket(self):
-        new_bucket = self.__storage_client.create_bucket(self.bucket_name)
-        log.info(f"New bucket '{self.bucket_name}' created!")
+        new_bucket = self.__storage_client.create_bucket(self.table_id)
+        log.info(f"New bucket '{self.table_id}' created!")
 
     def delete_bucket(self):
         bucket = self.__bucket_getter.get_bucket()

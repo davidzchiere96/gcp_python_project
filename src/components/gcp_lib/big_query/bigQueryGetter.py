@@ -1,6 +1,6 @@
 import os
-from logger import Log
-from cloudClientConnector import BigQueryClient
+from components.logger import Log
+from components.cloudClientConnector import BigQueryClient
 
 log_instance = Log()
 log = log_instance.logger()
