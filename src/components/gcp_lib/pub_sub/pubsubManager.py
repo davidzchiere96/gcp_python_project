@@ -1,7 +1,5 @@
 from components.cloudClientConnector import PublisherClient, SubscriberClient
 from components.logger import Log
-import components.inputRequests
-import json
 
 
 log_instance = Log()

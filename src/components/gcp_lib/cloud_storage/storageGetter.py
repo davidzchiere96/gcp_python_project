@@ -88,11 +88,6 @@ class FileGetter:
         except Exception as e:
             log.error(f"File '{self.file_name}' not exists.")
 
-
-
-
-
-    # tirare fuori oppure chiamare la size dirattemente nel managestoragefile come metadato
     def get_file_size(self):
         """Get the size of a GCS file."""
         # bucket = self.__bucket.get_bucket()

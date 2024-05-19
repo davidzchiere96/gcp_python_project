@@ -2,7 +2,7 @@ from components.cloudClientConnector import PublisherClient, SubscriberClient
 from components.logger import Log
 from concurrent.futures import TimeoutError
 
-timeout = 15.0 # timeout in seconds
+timeout = 15.0    # timeout in seconds
 
 log_instance = Log()
 log = log_instance.logger()
@@ -29,7 +29,3 @@ class Subscriber:
             streaming_pull_future.cancel()
             streaming_pull_future.result()
         return
-
-
-# sub = Subscriber("training-gcp-309207","chieregatod_topic","chieregatod_subscription")
-# sub.subscribe()

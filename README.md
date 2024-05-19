@@ -38,7 +38,7 @@
 This is a basic Python project managed by Poetry, designed to interact 
 with Google APIs and utilize core Google Cloud Platform libraries.
 
-## Main Architecture
+## Main Architecture (to update)
 The structure of the project is based on the Object Oriented Paradigm.
 ####
 The first two classes implemented in the **cloudClientConnector.py**:
@@ -55,41 +55,60 @@ The first two classes implemented in the **cloudClientConnector.py**:
         - def connect()
         - def get_client()
 
-are used to encapsulate the Cloud Storage and BigQuery client connection operations.
+    class PublisherClient(CloudClient)
+    -> Variables: client
+    -> Methods:
+        - def connect()
+        - def get_client()
+
+    class SubscriberClient(CloudClient)
+    -> Variables: client
+    -> Methods:
+        - def connect()
+        - def get_client()
+
+are used to encapsulate the Cloud Storage, BigQuery and Pub/Sub client connection operations.
 ####
 In the **storageGetter.py** other two classes are defined:
     
     class BucketGetter
     -> Variables: bucket_name, __storage_client
     -> Methods:
+        - def declare_bucket()
         - def get_bucket()
+        - def list_buckets()
+        - def list_files()
 
     class FileGetter
     -> Variables: file_name, bucket_name, __bucket_getter
     -> Methods:
-        - def file_bucket()
+        - def declare_file()
+        - def get_file()
+        - def get_file_size()
 
 that consent to instantiate a Bucket object and a File object 
 containing the get methods in order to have access to the storage object desired. 
 
 ####
-Finally in the **bigQueryGetter.py** the connection to a BQ table is defined as follows:
+In the **bigQueryGetter.py** the connection to a BQ table is defined as follows:
     
     class TableGetter
     -> Variables: table_id, __big_query_client
     -> Methods:
+        - def declare_table()
         - def get_table()
 
-All these classes are orchestrated by the **main.py** and the **inputRequests.py** 
-and logs are customized in the **logger.py**.
+All these classes are used in the "Manager" layer which represents the base modules
+used by tools like the **processer.main.py**.
+All the logs generated are customized in the **logger.py**.
 
-### Code Flow
+### Code Flow (to update)
 <p align="center">
   <img src="doc\img\api_python_project_code_flow.png" />
 </p>
 <br>
 
-### Class Diagram
+### Class Diagram (to update)
 <p align="center">
   <img src="doc\img\CLASS_DIAGRAM.png" />
 </p>

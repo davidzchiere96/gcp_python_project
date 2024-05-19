@@ -1,7 +1,6 @@
 import unittest
 from unittest.mock import MagicMock, patch
-from storageGetter import BucketGetter,FileGetter
-from cloudClientConnector import CloudStorageClient
+from components.gcp_lib.cloud_storage.storageGetter import BucketGetter,FileGetter
 
 
 class TestBucketGetter(unittest.TestCase):

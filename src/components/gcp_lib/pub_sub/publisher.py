@@ -1,7 +1,6 @@
 from components.cloudClientConnector import PublisherClient, SubscriberClient
 from components.logger import Log
 from components.gcp_lib.pub_sub.pubsubManager import Topic
-import components.inputRequests
 import json
 
 
@@ -23,6 +22,4 @@ class Publisher:
         return message
 
 
-# message = Publisher("ciao")
-# message.publish_message()
 
