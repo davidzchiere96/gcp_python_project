@@ -51,7 +51,7 @@ class BigQueryClient(CloudClient):
         return self.client
 
 
-class PubSubClient(CloudClient):
+class PublisherClient(CloudClient):
     def __init__(self):
         self.client = None
 
@@ -62,6 +62,23 @@ class PubSubClient(CloudClient):
 
         except Exception as e:
             log.error(f"Error connecting to Pub/Sub Publisher client: {e}")
+
+    def get_client(self):
+        if not self.client:
+            self.connect()
+        return self.client
+
+class SubscriberClient(CloudClient):
+    def __init__(self):
+        self.client = None
+
+    def connect(self):
+        try:
+            self.client = pubsub_v1.SubscriberClient()
+            log.info("Pub/Sub Subscriber Client connected!")
+
+        except Exception as e:
+            log.error(f"Error connecting to Pub/Sub Subscriber client: {e}")
 
     def get_client(self):
         if not self.client:

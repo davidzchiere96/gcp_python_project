@@ -14,7 +14,7 @@
   </a>
   </a>
   <a href="https://cloud.google.com/python/docs/reference/pubsub/latest">
-    <img src="https://img.shields.io/badge/Pub/Sub lib-3.21.0-bluegreen.svg" lazyload />
+    <img src="https://img.shields.io/badge/Pub/Sub lib-2.21.1-bluegreen.svg" lazyload />
   </a>
 
 ####
