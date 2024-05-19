@@ -14,13 +14,9 @@ log_instance = Log()
 log = log_instance.logger()
 
 
-# Nome del bucket di Google Cloud Storage
-bucket_name = "nome-del-tuo-bucket"
-file_name = ""
-local_file_path = ""
+
 
 # Funzione per caricare un file in Google Cloud Storage
-
 upload_to_storage = File(bucket_name,file_name,local_file_path).upload_file()
 
 # Funzione per leggere un file da Google Cloud Storage e inserirlo in BigQuery
@@ -42,7 +38,7 @@ def process_file(file_path, dataset_id, table_id):
     else:
         print("Data inserted into BigQuery successfully!")
 
-def get_query_count_result(): # query sulla tabella che fa una count sulla tabella e il risultato finira poi nel messaggio
+def execute_query_select(): # query sulla tabella che fa una count sulla tabella e il risultato finira poi nel messaggio
     result = 4
     return result
 
@@ -57,10 +53,16 @@ def publish_report_by_message(topic_name, message):
 
 
 def main():
-    upload_to_storage("src/config/film.csv")
+    bucket_name = "bucket_chieregatod_gcs_asset"
+    file_name = "film"
+    local_file_path = "src/config/film.csv"
+    table_id = "training-gcp-309207.dataset_chieregatoD.film"
+    topic_id = "chieregatod_topic"
+
+    File(bucket_name,file_name,local_file_path).upload_file()
 
     # Esempio di processamento di un file da GCS e inserimento in BigQuery
-    process_file("path/del/tuo/file.txt", "nome-del-tuo-dataset", "training-gcp-309207.dataset_chieregatoD.film")
+    process_from_storage("path/del/tuo/file.txt", "nome-del-tuo-dataset", "training-gcp-309207.dataset_chieregatoD.film")
 
     # Esempio di pubblicazione di un messaggio in un topic Pub/Sub
     message = {"rows_count": f"{get_query_count_result()}"} # value = "select count(*) from table film"
