@@ -5,11 +5,14 @@ from components.cloudClientConnector import BigQueryClient
 log_instance = Log()
 log = log_instance.logger()
 
-
 class TableGetter:
     def __init__(self, table_id):
         self.__big_query_client = BigQueryClient().get_client()
         self.table_id = table_id
+
+    def declare_table(self):
+        table = self.__big_query_client.table(self.table_id)
+        log.info(f"Table '{self.table_id}' declared!")
 
     def get_table(self):
         try:

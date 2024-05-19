@@ -1,7 +1,7 @@
 import os
-from logger import Log
-from cloudClientConnector import CloudStorageClient
-import inputRequests
+from components.logger import Log
+from components.cloudClientConnector import CloudStorageClient
+import components.inputRequests
 from datetime import datetime
 
 

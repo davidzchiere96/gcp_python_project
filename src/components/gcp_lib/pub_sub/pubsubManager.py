@@ -8,7 +8,7 @@ log_instance = Log()
 log = log_instance.logger()
 
 class Topic:
-    def __init__(self, project_id, topic_id):
+    def __init__(self, project_id="training-gcp-309207", topic_id="chieregatod_topic"):
 
         self.__pub_client = PublisherClient().get_client()
         self.project_id = project_id
@@ -27,7 +27,7 @@ class Topic:
 # topic.create_topic()
 
 class Message:
-    def __init__(self, project_id, topic_id, message):
+    def __init__(self, message, project_id="training-gcp-309207", topic_id="chieregatod_topic"):
 
         self.__pub_client = PublisherClient().get_client()
         self.topic_path = Topic(project_id, topic_id).topic_path
@@ -49,11 +49,12 @@ class Subscription:
 
         self.__sub_client = SubscriberClient().get_client()
         self.topic_path = Topic(project_id, topic_id).topic_path
+        self.subscription_id = subscription_id
         self.subscription_path = self.__sub_client.subscription_path(project_id, subscription_id)
 
     def create_subscription(self):
         self.__sub_client.create_subscription(name=self.subscription_path, topic=self.topic_path)
-
+        log.info(f"Subscription '{self.subscription_id}' created succesfully!")
         return self.subscription_path
 
     def callback(self, message):
