@@ -95,8 +95,9 @@ class FileGetter:
     # tirare fuori oppure chiamare la size dirattemente nel managestoragefile come metadato
     def get_file_size(self):
         """Get the size of a GCS file."""
-        bucket = self.__bucket.get_bucket()
-        blob = bucket.blob(self.file_name)
+        # bucket = self.__bucket.get_bucket()
+        # blob = bucket.blob(self.file_name)
+        blob = self.get_file()
 
         if blob.size is not None:
             size_in_bytes = float(blob.size)

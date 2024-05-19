@@ -1,8 +1,11 @@
 from components.cloudClientConnector import BigQueryClient, PublisherClient
 from components.gcp_lib.big_query.bigQueryGetter import TableGetter
+from components.gcp_lib.big_query.bigQueryManager import Table, SQL
 from components.gcp_lib.cloud_storage.storageGetter import FileGetter, BucketGetter
 from components.gcp_lib.cloud_storage.storageFileManager import Bucket, File
-from components.gcp_lib.pub_sub.pubsubManager import Topic, Message
+from components.gcp_lib.pub_sub.pubsubManager import Topic, Subscription
+from components.gcp_lib.pub_sub.publisher import Publisher
+
 from components.localGetter import LocalFileGetter
 from components.logger import Log
 from components import inputRequests
@@ -14,59 +17,29 @@ log_instance = Log()
 log = log_instance.logger()
 
 
-
-
-# Funzione per caricare un file in Google Cloud Storage
-upload_to_storage = File(bucket_name,file_name,local_file_path).upload_file()
-
-# Funzione per leggere un file da Google Cloud Storage e inserirlo in BigQuery
-def process_file(file_path, dataset_id, table_id):
-
-    blob = FileGetter(bucket_name,file_name).declare_file()
-    data = json.loads(blob.download_as_string())
-
-    # dataset_ref = bigquery_client.dataset(dataset_id)
-    # table_ref = dataset_ref.table(table_id)
-    # table = bigquery_client.get_table(table_ref)
-    table = TableGetter(table_id).get_table()
-
-    bq_client = BigQueryClient().get_client()
-    errors = bq_client.insert_rows_json(table, data)
-
-    if errors:
-        print("Errors during BigQuery insert:", errors)
-    else:
-        print("Data inserted into BigQuery successfully!")
-
-def execute_query_select(): # query sulla tabella che fa una count sulla tabella e il risultato finira poi nel messaggio
-    result = 4
-    return result
-
-# Funzione per pubblicare un messaggio in un topic Pub/Sub
-def publish_report_by_message(topic_name, message):
-    # publisher = PublisherClient.get_client()
-    # topic_path = publisher.topic_path(project_id, topic_name)
-    topic_path = Topic().topic_path
-    future = Message(message).publish_message
-    # future = publisher.publish(topic_path, json.dumps(message).encode())
-    # print("Published message ID:", future.result())
-
-
 def main():
     bucket_name = "bucket_chieregatod_gcs_asset"
-    file_name = "film"
-    local_file_path = "src/config/film.csv"
+    file_name = "film.json"
+    local_file_path = r"C:\Users\ECHIERDF9\OneDrive - NTT DATA EMEAL\Desktop\gcp_python_project\gcp_python_project\src\config\film.json"
     table_id = "training-gcp-309207.dataset_chieregatoD.film"
     topic_id = "chieregatod_topic"
 
+    # 1
     File(bucket_name,file_name,local_file_path).upload_file()
 
+    # 2
     # Esempio di processamento di un file da GCS e inserimento in BigQuery
-    process_from_storage("path/del/tuo/file.txt", "nome-del-tuo-dataset", "training-gcp-309207.dataset_chieregatoD.film")
+    Table(table_id).process_from_storage(bucket_name, file_name)
 
+    # 3
+    query = "SELECT count(*) as count_rows FROM `training-gcp-309207.dataset_chieregatoD.film`"
+    query_results = SQL(query).run_query()
+
+    # 4
     # Esempio di pubblicazione di un messaggio in un topic Pub/Sub
-    message = {"rows_count": f"{get_query_count_result()}"} # value = "select count(*) from table film"
-    publish_report_by_message("nome-del-tuo-topic", message)
+    message = {"query_results": f"{query_results}"} # value = "select count(*) from table film"
+    # publish_report_by_message("nome-del-tuo-topic", message)
+    Publisher(message).publish_message()
 
 
 

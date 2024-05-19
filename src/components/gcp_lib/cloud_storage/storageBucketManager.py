@@ -1,6 +1,6 @@
 from components.logger import Log
 from components.cloudClientConnector import CloudStorageClient
-from storageGetter import BucketGetter
+from components.gcp_lib.cloud_storage.storageGetter import BucketGetter
 import components.inputRequests
 
 

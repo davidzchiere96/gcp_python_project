@@ -24,3 +24,7 @@ class LocalFileGetter:
             return size_in_gb
         else:
             return None
+
+
+# file = LocalFileGetter(r"C:\Users\ECHIERDF9\OneDrive - NTT DATA EMEAL\Desktop\gcp_python_project\gcp_python_project\src\config\film.json")
+# file.get_local_file_size()

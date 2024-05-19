@@ -23,27 +23,6 @@ class Topic:
         return topic
 
 
-#topic = Topic("training-gcp-309207","chieregatod_topic")
-# topic.create_topic()
-
-class Message:
-    def __init__(self, message, project_id="training-gcp-309207", topic_id="chieregatod_topic"):
-
-        self.__pub_client = PublisherClient().get_client()
-        self.topic_path = Topic(project_id, topic_id).topic_path
-        self.message = message
-
-    def publish_message(self):
-
-        message = self.__pub_client.publish(self.topic_path, json.dumps(self.message).encode())
-        log.info(f"Published message ID: '{message.result()}'")
-
-        return message
-
-
-# message = Message("training-gcp-309207","chieregatod_topic", "ciao")
-# message.publish_message()
-
 class Subscription:
     def __init__(self, project_id, topic_id, subscription_id):
 
@@ -57,20 +36,5 @@ class Subscription:
         log.info(f"Subscription '{self.subscription_id}' created succesfully!")
         return self.subscription_path
 
-    def callback(self, message):
-        log.info(f"Call back function with message: '{message.data}'")
-        message.ack()
-
-        return message
-
-    def subscribe(self):
-        future = self.__sub_client.subscribe(self.subscription_path, self.callback)
-
-        return
 
 
-# message = Message("training-gcp-309207","chieregatod_topic", "ciao")
-# message.publish_message()
-
-# sub = Subscription("training-gcp-309207","chieregatod_topic","chieregatod_subscription")
-# sub.create_subscription()
