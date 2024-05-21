@@ -1,6 +1,3 @@
-# import sys
-# sys.path.append(r"C:\Users\ECHIERDF9\OneDrive - NTT DATA EMEAL\Desktop\gcp_python_project\gcp_python_project\src")
-
 import unittest
 import components.logger
 from unittest.mock import MagicMock, patch

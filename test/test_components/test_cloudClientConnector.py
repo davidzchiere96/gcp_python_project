@@ -2,17 +2,17 @@
 # sys.path.append(r"C:\Users\ECHIERDF9\OneDrive - NTT DATA EMEAL\Desktop\gcp_python_project\gcp_python_project\src")
 
 import unittest
-import logger
+from components.logger import Log
 from unittest.mock import patch, MagicMock
-from cloudClientConnector import CloudStorageClient,BigQueryClient
+from components.cloudClientConnector import CloudStorageClient,BigQueryClient
 
 # log = logger.logger()
 
 class TestCloudStorageClient(unittest.TestCase):
 
     # patch per mockare le due chiamate
-    @patch('cloudClientConnector.storage.Client')
-    @patch('cloudClientConnector.Log')
+    @patch('components.cloudClientConnector.storage.Client')
+    @patch('components.cloudClientConnector.Log')
     def test_connect_success(self, mock_log, mock_storage_client):
 
         # istanziamo un oggetto della classe CloudStorageClient su cui poi fare il test
@@ -39,14 +39,14 @@ class TestCloudStorageClient(unittest.TestCase):
         # assert
         # mock_log.logger.error.assert_called_once_with("Error connecting to storage client: Connection error")
 
-    @patch('cloudClientConnector.CloudStorageClient.connect')
+    @patch('components.cloudClientConnector.CloudStorageClient.connect')
     def test_get_client_if_not_connected(self, mock_storage_client_connect):
 
         cloud_storage_client = CloudStorageClient()
         cloud_storage_client.get_client()
         mock_storage_client_connect.assert_called_once()
 
-    @patch('cloudClientConnector.storage.Client')
+    @patch('components.cloudClientConnector.storage.Client')
     def test_get_client_if_connected(self, mock_storage_client):
 
         cloud_storage_client = CloudStorageClient()
@@ -59,8 +59,8 @@ class TestCloudStorageClient(unittest.TestCase):
 
 class TestBigQueryClient(unittest.TestCase):
 
-    @patch('cloudClientConnector.bigquery.Client')
-    @patch('cloudClientConnector.Log')
+    @patch('components.cloudClientConnector.bigquery.Client')
+    @patch('components.cloudClientConnector.Log')
     def test_connect_success(self, mock_log, mock_bigquery_client):
 
 
@@ -71,8 +71,8 @@ class TestBigQueryClient(unittest.TestCase):
         mock_bigquery_client.assert_called_once()
         # mock_log.info.assert_called_once_with("BigQuery Client connected!")
 
-    @patch('cloudClientConnector.bigquery.Client')
-    @patch('cloudClientConnector.Log')
+    @patch('components.cloudClientConnector.bigquery.Client')
+    @patch('components.cloudClientConnector.Log')
     def test_connect_failure(self, mock_log, mock_bigquery_client):
 
         # instantiate
@@ -85,14 +85,14 @@ class TestBigQueryClient(unittest.TestCase):
         # assert
         # mock_log.error.assert_called_once_with("Error connecting to BigQuery client: Connection error")
 
-    @patch('cloudClientConnector.BigQueryClient.connect')
+    @patch('components.cloudClientConnector.BigQueryClient.connect')
     def test_get_client_if_not_connected(self, mock_bigquery_client_connect):
 
         bigquery_client = BigQueryClient()
         bigquery_client.get_client()
         mock_bigquery_client_connect.assert_called_once()
 
-    @patch('cloudClientConnector.bigquery.Client')
+    @patch('components.cloudClientConnector.bigquery.Client')
     def test_get_client_if_connected(self, mock_bigquery_client):
 
         bigquery_client = BigQueryClient()
